@@ -1,6 +1,4 @@
-# **DEI Survey**
-
-Hello from Survey Surveyors!  
+# Tech Perspective Frontend
 
 ## **Deploy URL**
 
@@ -32,50 +30,53 @@ Hello from Survey Surveyors!
 
 *Allow the Admin user to...*
 
-- Access the survey.
-- Complete the survey.
-- View data on a stylized graph.
-- Compare data by multiple students in one class.
-- See how many students participate in the survey.
+- Create personal accounts.
+- Create new surveys linked on personal account.
+- Run multiple surveys at once between users.
+- View surveys user participated in.
+- See results in clear, concise graph.
 
 #### *Out of Scope*
 
-- Data from other schools and students will not be visible.
-- New students' data from other schools cannot be added.
+- Only data from created and completed surveys to users will be visible.
 
 ### Minimum Viable Product
 
 ![Survey Questions](./public/assets/surveyquestion.png)
 
 - **What will your MVP functionality be?**
-  - Access and complete the survey.
-  - Store immediate survey data in the DB.
-  - Render a stylized graph of the immediate data.
+  - Create personal accounts.
+  - View personal account data.
+  - Run multiple surveys at once across users.
 
 ### Stretch Goals
 
 - **What are your stretch goals?**
-  - Cache historical data.
-  - Develop a graph modeling historical data.
-  - Allow the user to access historical data and trends.
+  - Provide user with resoures about DEI in the tech world.
+  - Stylize chart in more clear, concise manner.
 - **What stretch goals are you going to aim for?**
-  - The ability to store historical data.
+  - Stylize chart in more clear, concise manner.
 
 ## **Software Requirements**
 
 ### **Functional Requirements**
 
-- User will be able to complete the survey and submit data.
-- User will be able to access a stylized graph of the immediate data.
-- User will be able to secure data and login information.
+1. User can create/login to their own accounts.
+2. User can create a new survey and share the individual link with others.
+3. Users can view the results of the survey they created.
+4. Users can view the results of the survey they participated in.
+5. Multiple users can run multiple surveys at one time.
 
 ### **Non-Functional Requirements**
 
 - **Security**
-  - Our app will use Auth0 to make sure we have authorized users
-  - This will allow us to track and personalize to our users
-  - Our backend will validate requests to make sure it is coming from our front end
-  - Managing the uses of our api and databases so only our users are able to access those resources
+  - Auth0 will authorize users to login into a personal account.
+  - Using the information from Auth0, it will allow users to view their personal data.
+  - Users will not be able to view any one else's data.
+- **Usability**
+  - React bootstrap will put app elements in visually pleasing and familiar format.
+  - Chart.js will display the results in a visually appealing format.
+  - Routes will allow users to view specific elements on different pages for better organization.
 
 - **Database**
   - Each item belongs to a single location
@@ -142,6 +143,8 @@ ClassSurvey = {
 
 ### Team Key Strengths?
 
+*Need to complete*
+
 **Erik** Program Management, React, JavaScript, teamwork, bootstrap-react
 **Joey** Front-end Design, creative, communication, leadership, team building, all-around BA
 **Emily** Front-end design, layout and CSS
@@ -156,6 +159,8 @@ ClassSurvey = {
 
 ### Team Professional Competencies
 
+*Need to complete*
+
 1. **Joey** wants to work on leadership and project management.
 2. **Erik** wants to work on communication and making his presentations sound more natural.
 3. **Emily** would like to refine her teamwork skills.
@@ -164,11 +169,15 @@ ClassSurvey = {
 
 ### Day to day work schedule
 
+*Need to complete*
+
 - 9:00am to 6:00pm 12pm-2pm lunch designed but open to interpretation.
 - Morning standup to go over what is planned.
 - Afternoon (~5:00PM) will be bringing all the code together and planning for the next day/
 
 ## Conflict Plan
+
+*Need to complete*
 
 - **Conflict Resolution**
   - One-on-one discussion,
@@ -180,19 +189,16 @@ ClassSurvey = {
 
 ### **Availability**
 
-- **Joey** 12AM cutoff (but is an insomniac - available for friends at all times)
-- **Erik** 12AM
-- **Emily** 12AM (EST)
-- **Michael** 12AM
-- **Ryan** 12AM but also available whenever
+- **Everyone** 9am-12pm, 1pm-6pm (PST)
 
 ### **Communication Platforms?**
 
 - Slack
 - Remo
-- Zoom/Discord
 
 ### Breaks an off hours
+
+*Need to complete*
 
 - As needed but will have planned lunch
 - If we start to fall behind?
@@ -203,10 +209,14 @@ ClassSurvey = {
 
 ### Making sure to hear all voices
 
+*Need to complete*
+
 - Everyone will be sharing at stand up and stand down.
 - Frame responses with mutual respect.
 
 ## Diversity Equity and Inclusion Plan
+
+*Need to complete*
 
 - **Joey** is going to do his best to check his internal biases and assumptions of others.
 - **Erik** speak up in challenging situations and bravery.
@@ -218,10 +228,12 @@ ClassSurvey = {
 
 ### **Tools for collaboration and workflow**
 
-- We will be creating a task list to manage things from our Trello board.
-- LiveShare on VS code.
+- Trello: board we used to list and check off various tasks.
+- GitHub Organization: Collectively edit our work reliably.
 
 ### **Git Process**
+
+*Need to complete*
 
 - Frontend and backend will live on the GitHub
 - Making an organization
@@ -231,22 +243,22 @@ ClassSurvey = {
 
 ### **PR Processes**
 
+*Need to complete*
+
 - Two other reviews for main
 - One for staging
 - Merging hopeful once a day but as necessary
 
 ### **Credit and Co-Conspirators**
 
-- This amazing final project was thoughtfully created and masterfully crafted by the master-minds of **Erik Savage**, **Michael Metcalf**, **Joey Hernandez**, **Emily Landers**, and **Ryan Lee**!
+- Created by **Jon Rumsey**, **Allen Brazier**, **Liesl White**, and **Simon Son**. Thank you to **Brook Riggio** for all your help with this project and all past contributers to this tech perspective survey! (*Erik Savage*, *Michael Metcalf*, *Joey Hernandez*, *Emily Landers*, and *Ryan Lee*!)
 
 ### **Contact the Team**
 
-[Follow Joey on LinkedIn](https://www.linkedin.com/in/jmhernandez2six/)
+[Follow Allen on LinkedIn](linkedin.com/in/allenbrazier)
 
-[Follow Erik on LinkedIn](https://www.linkedin.com/in/erikksavage/)
+[Follow Jon on LinkedIn](linkedin.com/in/jonathan-rumsey-wa)
 
-[Follow Emily on LinkedIn](https://www.linkedin.com/in/emily-landers-/)
+[Follow Liesl on LinkedIn](linkedin.com/in/lieslwhite)
 
-[Follow Michael on LinkedIn](https://www.linkedin.com/in/mt-metcalf/)
-
-[Follow Ryan on LinkedIn](https://www.linkedin.com/in/ryanyinlee/)
+[Follow Simon on LinkedIn](linkedin.com/in/sson68x)
