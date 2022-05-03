@@ -3,7 +3,7 @@ import Header from './components/Header';
 import Survey from './components/Survey';
 import Admin from './components/Admin';
 import Results from './components/Results';
-import AboutUs from './components/AboutUs';
+import AboutUs from './About-components/AboutUs';
 import { withAuth0 } from '@auth0/auth0-react';
 import {
   BrowserRouter as Router,
