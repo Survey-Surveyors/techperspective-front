@@ -1,0 +1,32 @@
+{
+  "data": [
+    {
+      "name": "Liesl White (she/her)",
+      "bio": "Full Stack Software Developer with a background in customer administration and support, risk management, and team leadership. A proactive team player that identifies long term goals through short term priorities. Strengths include problem-solving, leadership, and effective communication skills.",
+      "img": "src/About-components/ProfileImg/LieslWhite.jpeg",
+      "linkedin": "https://www.linkedin.com/in/lieslwhite",
+      "github": "https://github.com/LieslW"
+    },
+    {
+      "name": "Jonathan Rumsey",
+      "bio": "I am a full-stack javascript developer and an accomplished systems administrator, with a certificate in software testing and an associates degree in network technology. I came to appreciate coding while learning PowerShell to streamline my systems administrator tasks. I have since built projects in C# and Python. I enjoy participating in group projects designing and building solutions that leave a positive impact on its customers.",
+      "img": "src/About-components/ProfileImg/JonRumseyOnline.jpg",
+      "linkedin": "https://www.linkedin.com/in/jonathan-rumsey-wa",
+      "github": "https://github.com/nojronatron"
+    },
+    {
+      "name": "Simon Son",
+      "bio": "Hi, my name is Michael. I am coming into software development from the Army where I was for past 20 years. I enjoy the challenge of coding and am looking forward to a career as a software developer. I live in the Seattle area, Gig Harbor, with my wife and our dog. ",
+      "img": "/imgs/Metcalf_pic.jpeg",
+      "linkedin": "https://www.linkedin.com/in/sson68x",
+      "github": "https://github.com/Metty82"
+    },
+    {
+      "name": "Allen Brazier",
+      "bio": "Aspiring software developer with a penchant for placeholder text, formerly in retail management. Fond of problem and puzzle solving, as well as building things that miraculously work. Work well in teams, and experience in retail has given me a lot of patience as well as communication proficiency.",
+      "img": "/imgs/lee.png",
+      "linkedin": "https://www.linkedin.com/in/allenbrazier",
+      "github": "https://github.com/ryanyinlee"
+    }
+  ]
+}
