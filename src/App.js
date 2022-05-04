@@ -143,6 +143,8 @@ class App extends Component {
       const jwt = tokenResponse.__raw;
 
       // console.log(this.state.activeSurvey);
+      
+      // Don't know if we need this if statement below
       if (this.state.activeSurvey === undefined) {
         console.log('activeSurvey is null');
       } else {
