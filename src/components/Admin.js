@@ -3,8 +3,8 @@ import SurveySummaryList from './SurveySummaryList';
 import ActiveSurveyContainer from './ActiveSurveyContainer';
 import ConfirmModal from './ConfirmModal';
 import { withAuth0 } from '@auth0/auth0-react';
-import LoginButton from './LoginButton';
-import Row from 'react-bootstrap/Row';
+// import LoginButton from './LoginButton';
+// import Row from 'react-bootstrap/Row';
 
 
 class Admin extends Component {
@@ -35,13 +35,22 @@ class Admin extends Component {
                 {this.props.auth0.isAuthenticated ?
                     <>
                         
-                        <ActiveSurveyContainer activeSurvey={this.props.activeSurvey} createNewSurvey={this.props.createNewSurvey} graphResults={this.props.graphResults} openModal={this.openModal} getActiveSurvey={this.props.getActiveSurvey} />
-                        <SurveySummaryList getSavedSurvey={this.props.getSavedSurvey} graphResults={this.props.graphResults} surveyData={this.props.surveyData} deleteSavedSurvey={this.props.deleteSavedSurvey} />
+                        <ActiveSurveyContainer 
+                        activeSurvey={this.props.activeSurvey} 
+                        createNewSurvey={this.props.createNewSurvey} graphResults={this.props.graphResults} 
+                        openModal={this.openModal} 
+                        getActiveSurvey={this.props.getActiveSurvey} 
+                        />
+                        <SurveySummaryList 
+                        getSavedSurvey={this.props.getSavedSurvey} 
+                        graphResults={this.props.graphResults} 
+                        surveyData={this.props.surveyData} 
+                        deleteSavedSurvey={this.props.deleteSavedSurvey} />
                     </>
                     : 
-                    <Row style={{justifyContent: "center"}}>
-                    <LoginButton />
-                    </Row>}
+                    <></>
+                    }
+                    
             </div>
         )
     }

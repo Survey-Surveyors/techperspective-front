@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import Home from './components/Home';
 import Survey from './components/Survey';
 import Admin from './components/Admin';
 import Results from './components/Results';
 import AboutUs from './About-components/AboutUs';
+import Footer from './components/Footer';
 import { withAuth0 } from '@auth0/auth0-react';
 import {
   BrowserRouter as Router,
@@ -24,14 +26,17 @@ class App extends Component {
       surveyToGraph: []      
     }
   }
+
   graphResults = (obj) =>{
     this.setState({surveyToGraph: obj})
   }
+
   /* Grab survey data from server, which grabs from db */
   getSavedSurvey = async () => {
     if (this.props.auth0.isAuthenticated) {
       const tokenResponse = await this.props.auth0.getIdTokenClaims();
       const jwt = tokenResponse.__raw;
+      console.log('User: ', this.props.auth0.user_id);
 
       const axiosRequestConfig = {
         method: 'get',
@@ -43,6 +48,9 @@ class App extends Component {
       try {
         let result = await axios(axiosRequestConfig);
         this.setState({ surveyData: result.data });
+        this.state.surveyData.map((x) => {
+          console.log(x);
+        })
         this.setState({ error: false })
       } catch (error) {
         console.error("Data receive error: " + error);
@@ -171,13 +179,56 @@ class App extends Component {
     return (
       <>
         <Router>
+
           <Header />
+
           <Routes>
-            <Route path="/admin" element={<Admin graphResults={this.graphResults} activeSurvey={this.state.activeSurvey} createNewSurvey={this.createNewSurvey} surveyData={this.state.surveyData} putActiveSurvey={this.putActiveSurvey} deleteSavedSurvey={this.deleteSavedSurvey} getActiveSurvey={this.getActiveSurvey} getSavedSurvey={this.getSavedSurvey} />} />
-            <Route path="/results" element={<Results surveyToGraph= {this.state.surveyToGraph} getSavedSurvey={this.getSavedSurvey} surveyData={this.state.surveyData} />} />
-            <Route path="/" element={<Survey activeSurvey={this.state.activeSurvey} />} />
-            <Route path="/about" element={<AboutUs />} />
+
+            {/* <Route exact path="/">
+              <Home />
+            </Route> */}
+
+            <Route path="/"
+            element= {
+            <Home />
+          }/>
+
+            <Route path="/admin"
+             element={
+             <Admin 
+             graphResults={this.graphResults} 
+             activeSurvey={this.state.activeSurvey} 
+             createNewSurvey={this.createNewSurvey} 
+             surveyData={this.state.surveyData} 
+             putActiveSurvey={this.putActiveSurvey} 
+             deleteSavedSurvey={this.deleteSavedSurvey} 
+             getActiveSurvey={this.getActiveSurvey} 
+             getSavedSurvey={this.getSavedSurvey} />
+             }/>
+
+            <Route path="/results" 
+            element={
+            <Results surveyToGraph= {this.state.surveyToGraph} 
+            getSavedSurvey={this.getSavedSurvey} 
+            surveyData={this.state.surveyData} />
+            }/>
+
+            <Route path="/dei-survey" 
+            element={
+            <Survey activeSurvey={this.state.activeSurvey} />
+            }/>
+
+            {/* maybe don't name it "dei-survey" but for testing purposes, this stays */}
+
+            <Route path="/about" 
+            element={
+            <AboutUs />
+            }/>
+
           </Routes>
+
+          <Footer />
+
         </Router>
       </>
     )
@@ -185,5 +236,3 @@ class App extends Component {
 }
 
 export default withAuth0(App);
-// export default App;
-
