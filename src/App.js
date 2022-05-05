@@ -12,7 +12,7 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-import axios from "axios"; 
+import axios from "axios";
 
 class App extends Component {
 
@@ -23,12 +23,12 @@ class App extends Component {
       surveyData: [],
       surveyId: null,
       error: false,
-      surveyToGraph: []      
+      surveyToGraph: []
     }
   }
 
-  graphResults = (obj) =>{
-    this.setState({surveyToGraph: obj})
+  graphResults = (obj) => {
+    this.setState({ surveyToGraph: obj })
   }
 
   /* Grab survey data from server, which grabs from db */
@@ -86,14 +86,29 @@ class App extends Component {
 
   /* Ping server to create a new survey ID to enter into the survey Iframe*/
   createNewSurvey = async () => {
-    console.log('new survey button works');
-    let url = `${process.env.REACT_APP_SERVER_URL}/jotform`
-    try {
-      const newSurveyObj = await axios.post(url);
-      this.setState({ activeSurvey: newSurveyObj.data });
+    if (this.props.auth0.isAuthenticated) {
+      const tokenResponse = await this.props.auth0.getIdTokenClaims();
+      const jwt = tokenResponse.__raw;
+      console.log('new survey button works');
+      // let url = `${process.env.REACT_APP_SERVER_URL}/jotform`
+      
+      const axiosPostConfig = {
+        method: 'post',
+        baseURL: process.env.REACT_APP_SERVER_URL,
+        url: `/jotform`,
+        headers: { "Authorization": `Bearer ${jwt}` }
+      }
 
-    } catch (error) {
-      console.log(error, 'could not create new survey');
+      try {
+        const newSurveyObj = await axios(axiosPostConfig);
+        this.setState({ activeSurvey: newSurveyObj.data });
+        // this.state.activeSurvey.map((x) => {
+        //   console.log(x);
+        // })
+        
+      } catch (error) {
+        console.log(error, 'could not create new survey');
+      }
     }
   }
 
@@ -104,20 +119,20 @@ class App extends Component {
     //   const tokenResponse = await this.props.auth0.getIdTokenClaims();
     //   const jwt = tokenResponse.__raw;
     // }
-      const axiosRequestConfig = {
-        method: 'get',
-        baseURL: process.env.REACT_APP_SERVER_URL,
-        url: `/active`,
-        // headers: { "Authorization": `Bearer ${jwt}` }
-      }
-      // const url = `${process.env.REACT_APP_SERVER_URL}/active`
-      try {
-        const activeSurvey = await axios(axiosRequestConfig);
-        this.setState({ activeSurvey: activeSurvey.data });
-      } catch (error) {
-        console.log(error, 'No Active Survey');
-      }
-    
+    const axiosRequestConfig = {
+      method: 'get',
+      baseURL: process.env.REACT_APP_SERVER_URL,
+      url: `/active`,
+      // headers: { "Authorization": `Bearer ${jwt}` }
+    }
+    // const url = `${process.env.REACT_APP_SERVER_URL}/active`
+    try {
+      const activeSurvey = await axios(axiosRequestConfig);
+      this.setState({ activeSurvey: activeSurvey.data });
+    } catch (error) {
+      console.log(error, 'No Active Survey');
+    }
+
   }
 
   /* Archive the survey */
@@ -127,9 +142,15 @@ class App extends Component {
       const tokenResponse = await this.props.auth0.getIdTokenClaims();
       const jwt = tokenResponse.__raw;
 
-      console.log(this.state.activeSurvey);
-      this.state.activeSurvey.active = false;
-      console.log(this.state.activeSurvey);
+      // console.log(this.state.activeSurvey);
+      
+      // Don't know if we need this if statement below
+      if (this.state.activeSurvey === undefined) {
+        console.log('activeSurvey is null');
+      } else {
+        this.state.activeSurvey.active = false;
+        console.log(this.state.activeSurvey);
+      }
 
       const axiosRequestConfig = {
         method: 'post',
@@ -137,24 +158,24 @@ class App extends Component {
         url: `/survey`,
         data: this.state.activeSurvey,
         headers: { "Authorization": `Bearer ${jwt}` }
-        
+
       }
 
       try {
-      
-      await axios(axiosRequestConfig);
-      this.getActiveSurvey();
+
+        await axios(axiosRequestConfig);
+        this.getActiveSurvey();
       } catch (error) {
-      console.log(error, 'could not archive survey');
+        console.log(error, 'could not archive survey');
       }
     }
     window.location.reload();
   }
 
-  
 
 
-//Adds Auth0 Integration
+
+  //Adds Auth0 Integration
   getConfig = async () => {
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
@@ -162,7 +183,7 @@ class App extends Component {
       console.log(res);
       console.log(jwt);
       const config = {
-        headers: { "Authorization": `Bearer ${jwt}`},
+        headers: { "Authorization": `Bearer ${jwt}` },
       }
       console.log(config);
       return config;
@@ -170,12 +191,13 @@ class App extends Component {
   }
 
   componentDidMount() {
-    
+
     this.getActiveSurvey();
   }
 
 
   render() {
+    console.log('New Survey: ', this.state.activeSurvey);
     return (
       <>
         <Router>
@@ -189,41 +211,41 @@ class App extends Component {
             </Route> */}
 
             <Route path="/"
-            element= {
-            <Home />
-          }/>
+              element={
+                <Home />
+              } />
 
             <Route path="/admin"
-             element={
-             <Admin 
-             graphResults={this.graphResults} 
-             activeSurvey={this.state.activeSurvey} 
-             createNewSurvey={this.createNewSurvey} 
-             surveyData={this.state.surveyData} 
-             putActiveSurvey={this.putActiveSurvey} 
-             deleteSavedSurvey={this.deleteSavedSurvey} 
-             getActiveSurvey={this.getActiveSurvey} 
-             getSavedSurvey={this.getSavedSurvey} />
-             }/>
+              element={
+                <Admin
+                  graphResults={this.graphResults}
+                  activeSurvey={this.state.activeSurvey}
+                  createNewSurvey={this.createNewSurvey}
+                  surveyData={this.state.surveyData}
+                  putActiveSurvey={this.putActiveSurvey}
+                  deleteSavedSurvey={this.deleteSavedSurvey}
+                  getActiveSurvey={this.getActiveSurvey}
+                  getSavedSurvey={this.getSavedSurvey} />
+              } />
 
-            <Route path="/results" 
-            element={
-            <Results surveyToGraph= {this.state.surveyToGraph} 
-            getSavedSurvey={this.getSavedSurvey} 
-            surveyData={this.state.surveyData} />
-            }/>
+            <Route path="/results"
+              element={
+                <Results surveyToGraph={this.state.surveyToGraph}
+                  getSavedSurvey={this.getSavedSurvey}
+                  surveyData={this.state.surveyData} />
+              } />
 
-            <Route path="/dei-survey" 
-            element={
-            <Survey activeSurvey={this.state.activeSurvey} />
-            }/>
+            <Route path="/dei-survey"
+              element={
+                <Survey activeSurvey={this.state.activeSurvey} />
+              } />
 
             {/* maybe don't name it "dei-survey" but for testing purposes, this stays */}
 
-            <Route path="/about" 
-            element={
-            <AboutUs />
-            }/>
+            <Route path="/about"
+              element={
+                <AboutUs />
+              } />
 
           </Routes>
 
