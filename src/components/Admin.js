@@ -23,10 +23,10 @@ class Admin extends Component {
         this.setState({ showModal: true })
     }
 
-    componentDidMount() {
-        console.log(this.props.auth0.isAuthenticated);
-        this.props.getActiveSurvey();
-    }
+    // componentDidMount() {
+    //     console.log(this.props.auth0.isAuthenticated);
+    //     this.props.getActiveSurvey();
+    // }
     render() {
         console.log("we are looking at Admin.js", this.props.auth0.isAuthenticated);
         return (

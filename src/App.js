@@ -91,7 +91,7 @@ class App extends Component {
       const jwt = tokenResponse.__raw;
       console.log('new survey button works');
       // let url = `${process.env.REACT_APP_SERVER_URL}/jotform`
-      
+
       const axiosPostConfig = {
         method: 'post',
         baseURL: process.env.REACT_APP_SERVER_URL,
@@ -105,7 +105,7 @@ class App extends Component {
         // this.state.activeSurvey.map((x) => {
         //   console.log(x);
         // })
-        
+
       } catch (error) {
         console.log(error, 'could not create new survey');
       }
@@ -115,20 +115,31 @@ class App extends Component {
   /* Ping Jotform to clone a survey for the next class */
 
   getActiveSurvey = async () => {
-    // if (this.props.auth0.isAuthenticated) {
-    //   const tokenResponse = await this.props.auth0.getIdTokenClaims();
-    //   const jwt = tokenResponse.__raw;
-    // }
-    const axiosRequestConfig = {
-      method: 'get',
-      baseURL: process.env.REACT_APP_SERVER_URL,
-      url: `/active`,
-      // headers: { "Authorization": `Bearer ${jwt}` }
-    }
     // const url = `${process.env.REACT_APP_SERVER_URL}/active`
     try {
-      const activeSurvey = await axios(axiosRequestConfig);
-      this.setState({ activeSurvey: activeSurvey.data });
+      console.log('inside app.lgetActiveSurvey');
+      if (this.props.auth0.isAuthenticated) {
+        console.log('inside app.lgetActiveSurvey IF');
+        const tokenResponse = await this.props.auth0.getIdTokenClaims();
+        console.log('getActiveSurvey getIdTokenClaims result:', tokenResponse);
+        const jwt = tokenResponse.__raw;
+
+        const axiosRequestConfig = {
+          method: 'get',
+          baseURL: process.env.REACT_APP_SERVER_URL,
+          url: `/active`,
+          headers: { "Authorization": `Bearer ${jwt}` },
+        }
+
+        console.log('inside getActiveSurvey: getting const activeSurvey');
+        const activeSurvey = await axios(axiosRequestConfig);
+        console.log('inside getActiveSurbey activeSurvey.data', activeSurvey.data);
+
+        this.setState({ 
+          activeSurvey: activeSurvey.data 
+        });
+      }
+
     } catch (error) {
       console.log(error, 'No Active Survey');
     }
@@ -143,7 +154,7 @@ class App extends Component {
       const jwt = tokenResponse.__raw;
 
       // console.log(this.state.activeSurvey);
-      
+
       // Don't know if we need this if statement below
       if (this.state.activeSurvey === undefined) {
         console.log('activeSurvey is null');
@@ -197,7 +208,8 @@ class App extends Component {
 
 
   render() {
-    console.log('New Survey: ', this.state.activeSurvey);
+    console.log('this.props.isAuthenticated, user?:',this.props.auth0.isAuthenticated, this.props.auth0.user);
+    // console.log('New Survey: ', this.state.activeSurvey);
     return (
       <>
         <Router>
@@ -237,7 +249,7 @@ class App extends Component {
 
             <Route path="/dei-survey"
               element={
-                <Survey activeSurvey={this.state.activeSurvey} />
+                  this.state.activeSurvey && (<Survey activeSurvey={this.state.activeSurvey} />)
               } />
 
             {/* maybe don't name it "dei-survey" but for testing purposes, this stays */}
