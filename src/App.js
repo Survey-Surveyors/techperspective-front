@@ -47,12 +47,12 @@ class App extends Component {
 
       try {
         let result = await axios(axiosRequestConfig);
-        let userSurveys = result.data.filter( (userEmail) => userEmail.ownerID === this.props.auth0.user.email); 
+        let userSurveys = result.data.filter((userEmail) => userEmail.ownerID === this.props.auth0.user.email);
         console.log('userSurveys: ', userSurveys);
         this.setState({
-           surveyData: userSurveys,
-           error: false 
-          });
+          surveyData: userSurveys,
+          error: false
+        });
         //surveryData: result.data
         // this.state.surveyData.map((x) => {
         //   console.log(x);
@@ -121,6 +121,7 @@ class App extends Component {
   /* Ping Jotform to clone a survey for the next class */
 
   getActiveSurvey = async () => {
+    console.log('TEst for auth: ', this.props.auth0.isAuthenticated);
     // const url = `${process.env.REACT_APP_SERVER_URL}/active`
     try {
       console.log('inside app.lgetActiveSurvey');
@@ -138,11 +139,11 @@ class App extends Component {
         }
 
         console.log('inside getActiveSurvey: getting const activeSurvey');
-        const activeSurvey = await axios(axiosRequestConfig);
-        console.log('inside getActiveSurbey activeSurvey.data', activeSurvey.data);
+        const activeSurveyResponse = await axios(axiosRequestConfig);
+        console.log('inside getActiveSurbey activeSurvey.data', activeSurveyResponse.data);
 
-        this.setState({ 
-          activeSurvey: activeSurvey.data 
+        this.setState({
+          activeSurvey: activeSurveyResponse.data
         });
       }
 
@@ -207,14 +208,14 @@ class App extends Component {
     }
   }
 
-  componentDidMount() {
+  // componentDidMount() {
 
-    this.getActiveSurvey();
-  }
+  //   this.getActiveSurvey();
+  // }
 
 
   render() {
-    console.log('this.props.isAuthenticated, user?:',this.props.auth0.isAuthenticated, this.props.auth0.user);
+    console.log('this.props.isAuthenticated, user?:', this.props.auth0.isAuthenticated, this.props.auth0.user);
     // console.log('New Survey: ', this.state.activeSurvey);
     return (
       <>
@@ -233,18 +234,20 @@ class App extends Component {
                 <Home />
               } />
 
-            <Route path="/admin"
-              element={
-                <Admin
-                  graphResults={this.graphResults}
-                  activeSurvey={this.state.activeSurvey}
-                  createNewSurvey={this.createNewSurvey}
-                  surveyData={this.state.surveyData}
-                  putActiveSurvey={this.putActiveSurvey}
-                  deleteSavedSurvey={this.deleteSavedSurvey}
-                  getActiveSurvey={this.getActiveSurvey}
-                  getSavedSurvey={this.getSavedSurvey} />
-              } />
+            {this.props.auth0.isAuthenticated &&
+              (<Route path="/admin"
+                element={
+                  <Admin
+                    graphResults={this.graphResults}
+                    activeSurvey={this.state.activeSurvey}
+                    createNewSurvey={this.createNewSurvey}
+                    surveyData={this.state.surveyData}
+                    putActiveSurvey={this.putActiveSurvey}
+                    deleteSavedSurvey={this.deleteSavedSurvey}
+                    getActiveSurvey={this.getActiveSurvey}
+                    getSavedSurvey={this.getSavedSurvey} />
+                } />)
+            }
 
             <Route path="/results"
               element={
@@ -255,7 +258,7 @@ class App extends Component {
 
             <Route path="/dei-survey"
               element={
-                  this.state.activeSurvey && (<Survey activeSurvey={this.state.activeSurvey} />)
+                this.state.activeSurvey && (<Survey activeSurvey={this.state.activeSurvey} />)
               } />
 
             {/* maybe don't name it "dei-survey" but for testing purposes, this stays */}

@@ -27,6 +27,12 @@ class Admin extends Component {
     //     console.log(this.props.auth0.isAuthenticated);
     //     this.props.getActiveSurvey();
     // }
+
+    componentDidMount() {
+
+        this.props.getActiveSurvey();
+      }
+
     render() {
         console.log("we are looking at Admin.js", this.props.auth0.isAuthenticated);
         return (
