@@ -36,7 +36,7 @@ class App extends Component {
     if (this.props.auth0.isAuthenticated) {
       const tokenResponse = await this.props.auth0.getIdTokenClaims();
       const jwt = tokenResponse.__raw;
-      console.log('User: ', this.props.auth0.user_id);
+      console.log('User: ', this.props.auth0.user.sub);
 
       const axiosRequestConfig = {
         method: 'get',
@@ -47,11 +47,17 @@ class App extends Component {
 
       try {
         let result = await axios(axiosRequestConfig);
-        this.setState({ surveyData: result.data });
-        this.state.surveyData.map((x) => {
-          console.log(x);
-        })
-        this.setState({ error: false })
+        let userSurveys = result.data.filter( (userEmail) => userEmail.ownerID === this.props.auth0.user.email); 
+        console.log('userSurveys: ', userSurveys);
+        this.setState({
+           surveyData: userSurveys,
+           error: false 
+          });
+        //surveryData: result.data
+        // this.state.surveyData.map((x) => {
+        //   console.log(x);
+        // })
+        // this.setState({ error: false })
       } catch (error) {
         console.error("Data receive error: " + error);
         this.setState({ error: true });
