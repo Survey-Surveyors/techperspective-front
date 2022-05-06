@@ -1,30 +1,23 @@
 import { Component } from "react"
-import Button from 'react-bootstrap/Button';
 
 let REDIRECT = process.env.REACT_APP_AUTH_REDIRECT_URI;
 
 class CopyClipboard extends Component {
-  copyCodeToClipboard = () => {
-    const el = this.textArea
-    el.select()
-    document.execCommand("copy")
-  }
-
   render() {
     return (
       <div>
-        <div>
-          <textarea
-            ref={(textarea) => this.textArea = textarea}
-            defaultValue={this.props.activeSurvey.surveyID}
-          />
-        </div>
-        <div>
-          <Button onClick={() => this.copyCodeToClipboard()}>
-            Copy to Clipboard
-          </Button>
-          {/* change text value (ln 17) to a process.env variable with link then /dei-survey/id... */}
-        </div>
+        <h3>
+          Share User Link Below:
+        </h3>
+        <p>
+          {REDIRECT}/user-home
+        </p>
+        <h3>
+          Share User Key Below:
+        </h3>
+        <p>
+        {this.props.activeSurvey.surveyID}
+        </p>
       </div>
     )
   }

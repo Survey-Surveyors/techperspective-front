@@ -351,7 +351,8 @@ class App extends Component {
                   this.state.publicActive && (
                   <>
                   <HeaderUser />
-                  <Survey activeSurvey={this.state.publicActive} />
+                  <Survey 
+                  activeSurvey={this.state.publicActive}/>
                   </>
                   )}/>
 
