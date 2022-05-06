@@ -224,6 +224,7 @@ class App extends Component {
         redirect: true
       })
     } catch (error) {
+      console.log('Error');
       console.log(error, 'No Active Survey');
     }
   }
