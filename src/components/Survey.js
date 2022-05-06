@@ -7,7 +7,7 @@ export default class Survey extends Component {
             <div>
                  <br></br>
                 
-                <h1>Please complete the embedded survey below.</h1>
+                <h1>Please complete the DEI survey below.</h1>
 
                 <h2>Be sure to hit "SUBMIT" after answering the last question.</h2>
                 <br></br>

@@ -4,6 +4,7 @@ import Button from 'react-bootstrap/Button';
 import Row from 'react-bootstrap/Row';
 import ResultsButton from './ResultsButton';
 import CopyClipboard from './CopyClipboard';
+import LogOutButton from "./LogOutButton";
 
 
 class ActiveSurvey extends Component {
@@ -12,41 +13,63 @@ class ActiveSurvey extends Component {
   }
   render() {
     return (
-      <Card>
-        <Card.Header as="h5">Active Survey</Card.Header>
-        <Card.Body>
-          <Row md={6} style={{ justifyContent: 'space-around' }}>
+      <div className="active-survey-container">
+        <Card border="dark">
+          <Card.Body>
 
+            <Card.Title className="card-title">
+              Active Survey - ID: {this.props.activeSurvey.surveyID}
+            </Card.Title>
+
+            <div className="active-survey-subcon content-spacer" >
+              <div className="content-spacer">
+                <Card.Text className="content-spacer">
+                  Date: {this.props.activeSurvey.createdOn}
+                </Card.Text>
+                <Card.Text className="content-spacer">
+                  Submission Count: {this.props.activeSurvey.submissionCount}
+                </Card.Text>
+              </div>
+              <CopyClipboard />
+            </div>
+
+            <div className="view-archieve">
+              <ResultsButton
+                className="content-spacer"
+
+                surveyData={this.props.activeSurvey.results}
+                graphResults={this.props.graphResults}
+              />
+              <Button
+                className="content-spacer"
+                variant="outline-dark"
+                style={{ height: '3rem', width: '11rem' }}
+                onClick={this.props.openModal}>
+                Archive Survey
+              </Button>
+            </div>
+
+          </Card.Body>
+        </Card>
+        <Card border="dark">
+          <Card.Body>
             <Button
-              variant="primary"
+              className="content-spacer"
+              variant="success"
               onClick={this.props.getActiveSurvey}
-              style={{ height: '3rem', width: '11rem' }}>
-              Refresh
+              style={{ width: '11rem' }}>
+              Click to Refresh Active Survey
             </Button>
-
-            <CopyClipboard />
-
-            <Card.Title>{this.props.activeSurvey.createdOn}</Card.Title>
-            <Card.Text>
-              Survey ID: {this.props.activeSurvey.surveyID}
-            </Card.Text>
-            <Card.Text>
-              Submission Count: {this.props.activeSurvey.submissionCount}
-            </Card.Text>
-
-            <ResultsButton
-              surveyData={this.props.activeSurvey.results}
-              graphResults={this.props.graphResults}
+            <Card.Title
+              className="content-spacer"
+            >
+            </Card.Title>
+            <LogOutButton
+              className="content-spacer"
             />
-            <Button
-              variant="outline-dark"
-              style={{ height: '3rem', width: '11rem' }}
-              onClick={this.props.openModal}>
-              Archive Survey
-            </Button>
-          </Row>
-        </Card.Body>
-      </Card>
+          </Card.Body>
+        </Card>
+      </div>
     )
   }
 }
