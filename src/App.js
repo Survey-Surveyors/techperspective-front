@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import HeaderUser from './components/HeaderUser';
 import Home from './components/Home';
+import HomeUser from './components/HomeUser';
 import Survey from './components/Survey';
 import Admin from './components/Admin';
 import Results from './components/Results';
@@ -10,12 +12,13 @@ import { withAuth0 } from '@auth0/auth0-react';
 import {
   BrowserRouter as Router,
   Routes,
-  Route
+  Route,
 } from "react-router-dom";
 import axios from "axios";
 
-class App extends Component {
+let SERVER = process.env.REACT_APP_SERVER_URL;
 
+class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -23,9 +26,13 @@ class App extends Component {
       surveyData: [],
       surveyId: null,
       error: false,
-      surveyToGraph: []
+      surveyToGraph: [],
+      publicActive: [],
+      redirect: false,
+      key: ''
     }
   }
+
 
   graphResults = (obj) => {
     this.setState({ surveyToGraph: obj })
@@ -40,7 +47,7 @@ class App extends Component {
 
       const axiosRequestConfig = {
         method: 'get',
-        baseURL: process.env.REACT_APP_SERVER_URL,
+        baseURL: SERVER,
         url: '/survey',
         headers: { "Authorization": `Bearer ${jwt}` }
       }
@@ -73,7 +80,7 @@ class App extends Component {
 
       const axiosRequestConfig = {
         method: 'delete',
-        baseURL: process.env.REACT_APP_SERVER_URL,
+        baseURL: SERVER,
         url: `/survey/${id}`,
         headers: { "Authorization": `Bearer ${jwt}` }
       }
@@ -96,11 +103,11 @@ class App extends Component {
       const tokenResponse = await this.props.auth0.getIdTokenClaims();
       const jwt = tokenResponse.__raw;
       console.log('new survey button works');
-      // let url = `${process.env.REACT_APP_SERVER_URL}/jotform`
+      // let url = `${SERVER}/jotform`
 
       const axiosPostConfig = {
         method: 'post',
-        baseURL: process.env.REACT_APP_SERVER_URL,
+        baseURL: SERVER,
         url: `/jotform`,
         headers: { "Authorization": `Bearer ${jwt}` }
       }
@@ -122,7 +129,7 @@ class App extends Component {
 
   getActiveSurvey = async () => {
     console.log('TEst for auth: ', this.props.auth0.isAuthenticated);
-    // const url = `${process.env.REACT_APP_SERVER_URL}/active`
+    // const url = `${SERVER}/active`
     try {
       console.log('inside app.lgetActiveSurvey');
       if (this.props.auth0.isAuthenticated) {
@@ -133,7 +140,7 @@ class App extends Component {
 
         const axiosRequestConfig = {
           method: 'get',
-          baseURL: process.env.REACT_APP_SERVER_URL,
+          baseURL: SERVER,
           url: `/active`,
           headers: { "Authorization": `Bearer ${jwt}` },
         }
@@ -172,7 +179,7 @@ class App extends Component {
 
       const axiosRequestConfig = {
         method: 'post',
-        baseURL: process.env.REACT_APP_SERVER_URL,
+        baseURL: SERVER,
         url: `/survey`,
         data: this.state.activeSurvey,
         headers: { "Authorization": `Bearer ${jwt}` }
@@ -208,65 +215,146 @@ class App extends Component {
     }
   }
 
-  // componentDidMount() {
+  getActivePublicSurvey = async (activeKey) => {
+    try {
+      console.log('inside app.getActivePublicSurvey');
+      let publicResults = await axios.get(`${SERVER}/public-active/${activeKey.key}`);
+      console.log('pub res ', publicResults);
+      this.setState({
+        publicActive: publicResults.data,
+        redirect: true
+      })
+    } catch (error) {
+      console.log('Error');
+      console.log(error, 'No Active Survey');
+    }
+  }
 
-  //   this.getActiveSurvey();
-  // }
+  handleKeySubmit = async (e) => {
+    e.preventDefault();
+    console.log('key state', this.state.key);
+    let activeKey = {
+      key: this.state.key,
+    }
+    this.getActivePublicSurvey(activeKey);
+  }
 
+  handleKeyInput = (e) => {
+    console.log('input value: ', e.target.value);
+    this.setState({
+      key: e.target.value
+    })
+  }
 
   render() {
-    console.log('this.props.isAuthenticated, user?:', this.props.auth0.isAuthenticated, this.props.auth0.user);
+    console.log('key test', this.state.key);
+    // console.log('this.props.isAuthenticated, user?:', this.props.auth0.isAuthenticated, this.props.auth0.user);
     // console.log('New Survey: ', this.state.activeSurvey);
+    // console.log('Survey ID path test: ', this.state.activeSurvey);
+
     return (
       <>
         <Router>
-
-          <Header />
-
           <Routes>
-
-            {/* <Route exact path="/">
-              <Home />
-            </Route> */}
 
             <Route path="/"
               element={
-                <Home />
+                <>
+                  <Header
+                    getActiveSurvey={this.getActiveSurvey}
+                  />
+                  <Home />
+                </>
               } />
 
             {this.props.auth0.isAuthenticated &&
               (<Route path="/admin"
                 element={
-                  <Admin
-                    graphResults={this.graphResults}
-                    activeSurvey={this.state.activeSurvey}
-                    createNewSurvey={this.createNewSurvey}
-                    surveyData={this.state.surveyData}
-                    putActiveSurvey={this.putActiveSurvey}
-                    deleteSavedSurvey={this.deleteSavedSurvey}
-                    getActiveSurvey={this.getActiveSurvey}
-                    getSavedSurvey={this.getSavedSurvey} />
+                  <>
+                    <Header
+                      getActiveSurvey={this.getActiveSurvey}
+                    />
+                    <Admin
+                      graphResults={this.graphResults}
+                      activeSurvey={this.state.activeSurvey}
+                      createNewSurvey={this.createNewSurvey}
+                      surveyData={this.state.surveyData}
+                      putActiveSurvey={this.putActiveSurvey}
+                      deleteSavedSurvey={this.deleteSavedSurvey}
+                      getActiveSurvey={this.getActiveSurvey}
+                      getSavedSurvey={this.getSavedSurvey} />
+                  </>
                 } />)
             }
 
             <Route path="/results"
               element={
-                <Results surveyToGraph={this.state.surveyToGraph}
-                  getSavedSurvey={this.getSavedSurvey}
-                  surveyData={this.state.surveyData} />
+                <>
+                  <Header
+                    getActiveSurvey={this.getActiveSurvey}
+                  />
+                  <Results surveyToGraph={this.state.surveyToGraph}
+                    getSavedSurvey={this.getSavedSurvey}
+                    surveyData={this.state.surveyData} />
+                </>
               } />
 
             <Route path="/dei-survey"
               element={
-                this.state.activeSurvey && (<Survey activeSurvey={this.state.activeSurvey} />)
+                this.state.activeSurvey && (<>
+                  <Header
+                    getActiveSurvey={this.getActiveSurvey}
+                  />
+                  <Survey activeSurvey={this.state.activeSurvey} />
+                </>)
               } />
+
+
 
             {/* maybe don't name it "dei-survey" but for testing purposes, this stays */}
 
             <Route path="/about"
               element={
-                <AboutUs />
+                <>
+                  <Header
+                    getActiveSurvey={this.getActiveSurvey}
+                  />
+                  <AboutUs />
+                </>
               } />
+
+            <Route path="/user-home"
+              element={
+                <>
+                <HeaderUser />
+                <HomeUser
+                getActivePublicSurvey={this.getActivePublicSurvey}
+                handleKeySubmit={this.handleKeySubmit}
+                handleKeyInput={this.handleKeyInput}
+                redirect={this.state.redirect}
+                />
+                </>
+              } />
+
+            <Route path="/user-about"
+              element={
+                <>
+                <HeaderUser 
+                key={this.state.key}
+                />
+                <AboutUs />
+                </>
+              } />
+
+              <Route path="/public-survey"
+                element={
+                  this.state.publicActive && (
+                  <>
+                  <HeaderUser />
+                  <Survey 
+                  activeSurvey={this.state.publicActive}/>
+                  </>
+                  )}/>
 
           </Routes>
 

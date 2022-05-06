@@ -1,7 +1,7 @@
 import { Component } from "react";
 import NewSurveyButton from "./NewSurveyButton";
 import ActiveSurvey from "./ActiveSurvey";
-import LogOutButton from "./LogOutButton";
+// import LogOutButton from "./LogOutButton";
 
 class ActiveSurveyContainer extends Component {
   // componentDidMount() {
