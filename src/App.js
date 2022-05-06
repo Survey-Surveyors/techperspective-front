@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import Header from './components/Header';
+import HeaderUser from './components/HeaderUser';
 import Home from './components/Home';
+import HomeUser from './components/HomeUser';
 import Survey from './components/Survey';
 import Admin from './components/Admin';
 import Results from './components/Results';
@@ -11,7 +13,6 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Navigate
 } from "react-router-dom";
 import axios from "axios";
 
@@ -254,63 +255,105 @@ class App extends Component {
     return (
       <>
         <Router>
-          <Header />
-
           <Routes>
-
-            {/* <Route exact path="/">
-              <Home />
-            </Route> */}
 
             <Route path="/"
               element={
-                <Home
-                  getActivePublicSurvey={this.getActivePublicSurvey}
-                  handleKeySubmit={this.handleKeySubmit}
-                  handleKeyInput={this.handleKeyInput}
-                  redirect={this.state.redirect}
-                />
+                <>
+                  <Header
+                    getActiveSurvey={this.getActiveSurvey}
+                  />
+                  <Home />
+                </>
               } />
 
             {this.props.auth0.isAuthenticated &&
               (<Route path="/admin"
                 element={
-                  <Admin
-                    graphResults={this.graphResults}
-                    activeSurvey={this.state.activeSurvey}
-                    createNewSurvey={this.createNewSurvey}
-                    surveyData={this.state.surveyData}
-                    putActiveSurvey={this.putActiveSurvey}
-                    deleteSavedSurvey={this.deleteSavedSurvey}
-                    getActiveSurvey={this.getActiveSurvey}
-                    getSavedSurvey={this.getSavedSurvey} />
+                  <>
+                    <Header
+                      getActiveSurvey={this.getActiveSurvey}
+                    />
+                    <Admin
+                      graphResults={this.graphResults}
+                      activeSurvey={this.state.activeSurvey}
+                      createNewSurvey={this.createNewSurvey}
+                      surveyData={this.state.surveyData}
+                      putActiveSurvey={this.putActiveSurvey}
+                      deleteSavedSurvey={this.deleteSavedSurvey}
+                      getActiveSurvey={this.getActiveSurvey}
+                      getSavedSurvey={this.getSavedSurvey} />
+                  </>
                 } />)
             }
 
             <Route path="/results"
               element={
-                <Results surveyToGraph={this.state.surveyToGraph}
-                  getSavedSurvey={this.getSavedSurvey}
-                  surveyData={this.state.surveyData} />
+                <>
+                  <Header
+                    getActiveSurvey={this.getActiveSurvey}
+                  />
+                  <Results surveyToGraph={this.state.surveyToGraph}
+                    getSavedSurvey={this.getSavedSurvey}
+                    surveyData={this.state.surveyData} />
+                </>
               } />
 
             <Route path="/dei-survey"
               element={
-                this.state.activeSurvey && (<Survey activeSurvey={this.state.activeSurvey} />)
+                this.state.activeSurvey && (<>
+                  <Header
+                    getActiveSurvey={this.getActiveSurvey}
+                  />
+                  <Survey activeSurvey={this.state.activeSurvey} />
+                </>)
               } />
 
-            <Route path="/public-survey"
-              element={
-                this.state.publicActive && (<Survey activeSurvey={this.state.publicActive} />)
-              } />
 
 
             {/* maybe don't name it "dei-survey" but for testing purposes, this stays */}
 
             <Route path="/about"
               element={
-                <AboutUs />
+                <>
+                  <Header
+                    getActiveSurvey={this.getActiveSurvey}
+                  />
+                  <AboutUs />
+                </>
               } />
+
+            <Route path="/user-home"
+              element={
+                <>
+                <HeaderUser />
+                <HomeUser
+                getActivePublicSurvey={this.getActivePublicSurvey}
+                handleKeySubmit={this.handleKeySubmit}
+                handleKeyInput={this.handleKeyInput}
+                redirect={this.state.redirect}
+                />
+                </>
+              } />
+
+            <Route path="/user-about"
+              element={
+                <>
+                <HeaderUser 
+                key={this.state.key}
+                />
+                <AboutUs />
+                </>
+              } />
+
+              <Route path="/public-survey"
+                element={
+                  this.state.publicActive && (
+                  <>
+                  <HeaderUser />
+                  <Survey activeSurvey={this.state.publicActive} />
+                  </>
+                  )}/>
 
           </Routes>
 

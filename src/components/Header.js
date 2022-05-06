@@ -43,7 +43,7 @@ class Header extends Component {
 
               <Col>
               <Link className="headerButton" to="/dei-survey">
-                <Button style={{height: '3vw', width: '11vw', marginLeft: "1vw", marginRight: "1vw"}} variant="warning">Show Survey</Button>
+                <Button onClick={this.props.getActiveSurvey} style={{height: '3vw', width: '11vw', marginLeft: "1vw", marginRight: "1vw"}} variant="warning">Show Survey</Button>
               </Link>
               </Col>
 
