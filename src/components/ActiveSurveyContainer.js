@@ -29,7 +29,7 @@ class ActiveSurveyContainer extends Component {
 
           {/* {this.props.activeSurvey &&  */}
 
-          <LogOutButton />
+          {/* <LogOutButton /> */}
         </div>
         <br></br>
       </>
