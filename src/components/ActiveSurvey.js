@@ -24,7 +24,9 @@ class ActiveSurvey extends Component {
               Refresh
             </Button>
 
-            <CopyClipboard />
+            <CopyClipboard 
+            activeSurvey={this.props.activeSurvey}
+            />
 
             <Card.Title>{this.props.activeSurvey.createdOn}</Card.Title>
             <Card.Text>

@@ -16,7 +16,7 @@ class CopyClipboard extends Component {
         <div>
           <textarea
             ref={(textarea) => this.textArea = textarea}
-            defaultValue={`${REDIRECT}/dei-survey`}
+            defaultValue={this.props.activeSurvey.surveyID}
           />
         </div>
         <div>

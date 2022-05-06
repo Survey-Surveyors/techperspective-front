@@ -215,8 +215,9 @@ class App extends Component {
 
 
   render() {
-    console.log('this.props.isAuthenticated, user?:', this.props.auth0.isAuthenticated, this.props.auth0.user);
+    // console.log('this.props.isAuthenticated, user?:', this.props.auth0.isAuthenticated, this.props.auth0.user);
     // console.log('New Survey: ', this.state.activeSurvey);
+    // console.log('Survey ID path test: ', this.state.activeSurvey);
     return (
       <>
         <Router>
@@ -256,10 +257,11 @@ class App extends Component {
                   surveyData={this.state.surveyData} />
               } />
 
-            <Route path="/dei-survey"
-              element={
-                this.state.activeSurvey && (<Survey activeSurvey={this.state.activeSurvey} />)
-              } />
+              <Route path="/dei-survey"
+                element={
+                  this.state.activeSurvey && (<Survey activeSurvey={this.state.activeSurvey} />)
+                } />
+            
 
             {/* maybe don't name it "dei-survey" but for testing purposes, this stays */}
 
