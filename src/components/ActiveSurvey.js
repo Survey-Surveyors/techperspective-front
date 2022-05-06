@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import Card from 'react-bootstrap/Card';
 import Button from 'react-bootstrap/Button';
-import Row from 'react-bootstrap/Row';
+// import Row from 'react-bootstrap/Row';
 import ResultsButton from './ResultsButton';
 import CopyClipboard from './CopyClipboard';
 import LogOutButton from "./LogOutButton";
@@ -30,7 +30,9 @@ class ActiveSurvey extends Component {
                   Submission Count: {this.props.activeSurvey.submissionCount}
                 </Card.Text>
               </div>
-              <CopyClipboard />
+              <CopyClipboard 
+              activeSurvey={this.props.activeSurvey}
+              />
             </div>
 
             <div className="view-archieve">

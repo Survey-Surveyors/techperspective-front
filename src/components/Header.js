@@ -4,8 +4,8 @@ import { withAuth0 } from '@auth0/auth0-react'
 import LoginButton from './LoginButton';
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
 
 class Header extends Component {
   handleLoginClick = () => {
@@ -40,7 +40,7 @@ class Header extends Component {
 
             <div>
               <Link className="headerButton" to="/dei-survey">
-                <Button style={{ height: '3vw', width: '12vw', marginLeft: "1vw", marginRight: "1vw" }} variant="warning">Show Survey</Button>
+                <Button onClick={this.props.getActiveSurvey} style={{ height: '3vw', width: '12vw', marginLeft: "1vw", marginRight: "1vw" }} variant="warning">Show Survey</Button>
               </Link>
             </div>
 
