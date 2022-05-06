@@ -12,7 +12,7 @@ export default class AboutUs extends Component {
     return (
 
       <>
-        <h1 id="aboutTitle">We Are Melting-Pot Data</h1>
+        <h1 id="aboutTitle">No need to fear; Survey Surveyors are here!</h1>
         <Container fluid
           style={{
             display: 'flex',

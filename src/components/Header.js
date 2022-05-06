@@ -1,10 +1,11 @@
 import { Component } from "react";
 import { Link } from "react-router-dom";
 import { withAuth0 } from '@auth0/auth0-react'
+import LoginButton from './LoginButton';
 import Button from "react-bootstrap/Button";
 import Image from "react-bootstrap/Image";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
+// import Row from "react-bootstrap/Row";
+// import Col from "react-bootstrap/Col";
 
 class Header extends Component {
   handleLoginClick = () => {
@@ -17,42 +18,49 @@ class Header extends Component {
 
   render() {
     return (
-      <>  
-          <Row id="headerBackground" md={4} style={{justifyContent:"space-between"}}>
-          
-            <Col>
-          <Image
-            id="headerImage"
-            src="cf-logo-horizontal-2-color-white.png"
-          />
-          </Col>
-          
-          {this.props.auth0.isAuthenticated ? 
-       
-            <div  class="container">
-              <Col>
-              <Link class="headerButtonSurvey" to="/">
-                <Button style={{height: '3rem', width: '11rem', backgroundColor: "#ea4444", marginLeft: "1rem", marginRight: "1rem"}} variant="primary">Show Survey</Button>
-              </Link>
-              </Col>
+      <div className="header-container" id="headerBackground" md={4}>
+          <div>
+            <Image
+              id="headerImage"
+              src="cf-logo-horizontal-2-color-white.png"
+            />
+          </div>
 
-              <Col>
-              <br></br>
-              </Col>
-
-              <Col>
-              <Link type="button" class="headerButtonAdmin" to="/Admin">
-                <Button style={{height: '3rem', width: '11rem', marginLeft: "1rem"}} variant="light">Admin Panel</Button>
+            <div>
+              <Link className="headerButton" to="/">
+                <Button style={{ height: '3vw', width: '10vw', backgroundColor: "#ea4444", marginLeft: "1vw" }} variant="warning">Home</Button>
               </Link>
-              </Col>
-              
-              <br></br>
             </div>
-            
-           : <></>}
-        </Row>
 
-      </>
+            <div>
+              <Link type="button" className="headerButton" to="/about">
+                <Button style={{ height: '3vw', width: '10vw', marginLeft: "1vw" }} variant="info">About Us</Button>
+              </Link>
+            </div>
+
+            <div>
+              <Link className="headerButton" to="/dei-survey">
+                <Button onClick={this.props.getActiveSurvey} style={{ height: '3vw', width: '12vw', marginLeft: "1vw", marginRight: "1vw" }} variant="warning">Show Survey</Button>
+              </Link>
+            </div>
+
+          {this.props.auth0.isAuthenticated ?
+            
+
+
+              <div>
+                <Link type="button" className="headerButton" to="/Admin">
+                  <Button style={{ height: '3vw', width: '11vw', marginLeft: "1vw", marginRight: "1vw" }} variant="light">Admin Panel</Button>
+                </Link>
+              </div>
+  
+            :
+            
+              <LoginButton />
+            }
+      
+
+      </div>
     );
   }
 }

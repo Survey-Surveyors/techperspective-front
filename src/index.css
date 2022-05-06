@@ -6,7 +6,7 @@ body {
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale; 
+  -moz-osx-font-smoothing: grayscale;
 }
 
 code {
@@ -14,20 +14,61 @@ code {
     monospace;
 }
 
-h1, h2 {
+h1,
+h2 {
   font-family: 'DM Sans', sans-serif;
-  text-align:center;
+  text-align: center;
 }
 
 .container {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-  padding: 10px;
+  padding: 3vw;
+  grid-auto-rows: minmax(100px, auto); */
+  background: black;
+}
+
+.header-container {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-title {
+  display: flex;
+  justify-content: center;
+  padding: 10px 10px;
+}
+
+.view-archive {
+ display: flex;
+ justify-content: center;
+}
+
+.active-survey-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.active-survey-subcon {
+  margin: auto;
+  display: flex;
+  justify-content: center;
+}
+
+.content-spacer {
+  margin: 0px 10px 20px 10px;
 }
 
 .headerButtonSurvey {
   grid-column: 1;
-  color: hotpink
+  /* color: hotpink */
+}
+
+.headerButton {
+  font-size: 2vw;
 }
 
 .headerButtonAdmin {
@@ -37,21 +78,31 @@ h1, h2 {
 }
 
 #headerImage {
-  background-color: rgba(0, 0, 0, 0.781);
-  width:24rem;
-  
-  padding-left: 3rem;
-  padding-right: 3rem;
-  padding-top: 1rem;
-  padding-bottom: 1rem;
- 
+  width: 25vw;
+  margin: 35px;
+
+  /* padding-left: 3vw;
+  padding-right: 3vw;
+  padding-top: 1vw;
+  padding-bottom: 1vw; */
+
 }
 
-#authLogInButton {
+/* #authLogInButton {
   margin-left:auto;
   margin-right:auto;
-}
+} */
 
 #headerBackground {
   background-color: rgba(0, 0, 0, 0.781);
+}
+
+#Footer {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+#home {
+  width: 100%
 }

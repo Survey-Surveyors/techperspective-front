@@ -1,0 +1,25 @@
+{
+  "data": [
+    {
+      "name": "Liesl White (she/her)",
+      "bio": "Full Stack Software Developer with a background in customer administration and support, risk management, and team leadership. A proactive team player that identifies long term goals through short term priorities. Strengths include problem-solving, leadership, and effective communication skills.",
+      "img": "assets/LieslWhite.jpeg",
+      "linkedin": "https://www.linkedin.com/in/lieslwhite",
+      "github": "https://github.com/LieslW"
+    },
+    {
+      "name": "Jonathan Rumsey",
+      "bio": "I am a full-stack javascript developer and an accomplished systems administrator, with a certificate in software testing and an associates degree in network technology. I came to appreciate coding while learning PowerShell to streamline my systems administrator tasks. I have since built projects in C# and Python. I enjoy participating in group projects designing and building solutions that leave a positive impact on its customers.",
+      "img": "assets/JonRumseyOnline.jpg",
+      "linkedin": "https://www.linkedin.com/in/jonathan-rumsey-wa",
+      "github": "https://github.com/nojronatron"
+    },
+    {
+      "name": "Simon Son",
+      "bio": "Hi, my name is Simon Son. I am currently studying to become a software developer. I served in the Army for 4 years and earned my degree in human development at UC Davis. While working as a sales manager, I always looked for something new to learn in the tech industry and discovered a deep interest in programming languages during the onset of the pandemic. ",
+      "img": "assets/simon.jpg",
+      "linkedin": "https://www.linkedin.com/in/sson68x",
+      "github": "https://github.com/Metty82"
+    }
+  ]
+}
