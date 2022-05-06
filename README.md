@@ -17,6 +17,9 @@
 ## **The Problem Domain**
 
 - This project will revolutionize the existing survey data, making it more user friendly and potentially caching historical data.
+![Domain Model](./public/assets/wire.JPG)
+---
+![Domain Model](./public/assets/relation.JPG)
 
 ## **The Importance**
 
@@ -59,6 +62,8 @@
 
 ## **Software Requirements**
 
+  - ![Requirements](./requirements.md)
+
 ### **Functional Requirements**
 
 1. User can create/login to their own accounts.
@@ -86,7 +91,7 @@
 
 ### **Data Flow**
 
-![Data flow for the survey](./public/assets/surveydata.png)
+![Data flow for the survey](./public/assets/wrrc.JPG)
 
 ### DataBase Schemas
 

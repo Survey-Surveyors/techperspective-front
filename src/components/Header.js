@@ -18,60 +18,49 @@ class Header extends Component {
 
   render() {
     return (
-      <>  
-          <Row id="headerBackground" md={4} style={{justifyContent:"space-between"}}>
-          
-            <Col>
-          <Image
-            id="headerImage"
-            src="cf-logo-horizontal-2-color-white.png"
-          />
-          </Col>
-          <div className="container">
-
-          <Col>
-              <Link className="headerButton" to="/">
-                <Button style={{height: '3vw', width: '11vw', backgroundColor: "#ea4444", marginLeft: "1vw"}} variant="warning">Home</Button>
-              </Link>
-              </Col>
-
-              <Col>
-              <Link type="button" className="headerButton" to="/about">
-                <Button style={{height: '3vw', width: '11vw', marginLeft: "1vw"}} variant="info">About Us</Button>
-              </Link>
-              </Col>
-
-              <Col>
-              <Link className="headerButton" to="/dei-survey">
-                <Button onClick={this.props.getActiveSurvey} style={{height: '3vw', width: '11vw', marginLeft: "1vw", marginRight: "1vw"}} variant="warning">Show Survey</Button>
-              </Link>
-              </Col>
-
+      <div className="header-container" id="headerBackground" md={4}>
+          <div>
+            <Image
+              id="headerImage"
+              src="cf-logo-horizontal-2-color-white.png"
+            />
           </div>
 
-          {this.props.auth0.isAuthenticated ? 
-            <div  className="container">
-
-              <Col>
-              {/* <br></br> */}
-              {/* line break but doesn't seem to be noticeable on the page */}
-              </Col>
-
-              <Col>
-              <Link type="button" className="headerButton" to="/Admin">
-                <Button style={{height: '3vw', width: '11vw', marginLeft: "1vw", marginRight:"1vw"}} variant="light">Admin Panel</Button>
+            <div>
+              <Link className="headerButton" to="/">
+                <Button style={{ height: '3vw', width: '10vw', backgroundColor: "#ea4444", marginLeft: "1vw" }} variant="warning">Home</Button>
               </Link>
-              </Col>
-
-              {/* <br></br> */}
             </div>
-           : 
-           <div  className="container">
-           <LoginButton />
-           </div>}
-        </Row>
 
-      </>
+            <div>
+              <Link type="button" className="headerButton" to="/about">
+                <Button style={{ height: '3vw', width: '10vw', marginLeft: "1vw" }} variant="info">About Us</Button>
+              </Link>
+            </div>
+
+            <div>
+              <Link className="headerButton" to="/dei-survey">
+                <Button style={{ height: '3vw', width: '12vw', marginLeft: "1vw", marginRight: "1vw" }} variant="warning">Show Survey</Button>
+              </Link>
+            </div>
+
+          {this.props.auth0.isAuthenticated ?
+            
+
+
+              <div>
+                <Link type="button" className="headerButton" to="/Admin">
+                  <Button style={{ height: '3vw', width: '11vw', marginLeft: "1vw", marginRight: "1vw" }} variant="light">Admin Panel</Button>
+                </Link>
+              </div>
+  
+            :
+            
+              <LoginButton />
+            }
+      
+
+      </div>
     );
   }
 }

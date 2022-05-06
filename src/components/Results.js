@@ -14,8 +14,8 @@ class Results extends Component {
                 display: "flex", 
                 justifyContent:"center", 
                 position:"relative", 
-                height:"40vh", 
-                width:"80vw"
+                height:"30vh", 
+                width:"55vw"
                 }}> 
 
                 <ResultsGraph 
