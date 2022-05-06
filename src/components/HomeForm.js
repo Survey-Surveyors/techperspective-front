@@ -1,22 +1,16 @@
 import React from 'react';
-import { Form, FormGroup } from 'react-bootstrap';
+import { Form, FormGroup, Button } from 'react-bootstrap';
+import {Navigate} from 'react-router-dom';
 
 
 class HomeForm extends React.Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            key: '',
-        }
-    }
-    
-    
-    handleKeyInput = (e) => {
-        this.setState({})
-        
-    }
 
     render () {
+        // console.log('key test', this.state.key);
+        if(this.props.redirect){
+            console.log('navigating');
+            return <Navigate to="/public-survey"/>
+          }
         return(
             <>
                 <Form className="key-form">
@@ -25,10 +19,10 @@ class HomeForm extends React.Component {
                         <Form.Label>
                             Enter Survey Key Here:
                         </Form.Label>
-                            <Form.Control type="text" placeholder="Ex.123..." />
-                    {/* <Button>
-
-                    </Button> */}
+                            <Form.Control type="text" placeholder="Ex.123..." onChange={this.props.handleKeyInput}/>
+                    <Button onClick={this.props.handleKeySubmit}>
+                        Submit
+                    </Button>
                     </FormGroup>
                 </Form>
             </>
