@@ -43,7 +43,7 @@ class App extends Component {
     if (this.props.auth0.isAuthenticated) {
       const tokenResponse = await this.props.auth0.getIdTokenClaims();
       const jwt = tokenResponse.__raw;
-      console.log('User: ', this.props.auth0.user.sub);
+      // console.log('User: ', this.props.auth0.user.sub);
 
       const axiosRequestConfig = {
         method: 'get',
@@ -55,16 +55,11 @@ class App extends Component {
       try {
         let result = await axios(axiosRequestConfig);
         let userSurveys = result.data.filter((userEmail) => userEmail.ownerID === this.props.auth0.user.email);
-        console.log('userSurveys: ', userSurveys);
+        // console.log('userSurveys: ', userSurveys);
         this.setState({
           surveyData: userSurveys,
           error: false
         });
-        //surveryData: result.data
-        // this.state.surveyData.map((x) => {
-        //   console.log(x);
-        // })
-        // this.setState({ error: false })
       } catch (error) {
         console.error("Data receive error: " + error);
         this.setState({ error: true });
@@ -102,8 +97,7 @@ class App extends Component {
     if (this.props.auth0.isAuthenticated) {
       const tokenResponse = await this.props.auth0.getIdTokenClaims();
       const jwt = tokenResponse.__raw;
-      console.log('new survey button works');
-      // let url = `${SERVER}/jotform`
+      // console.log('new survey button works');
 
       const axiosPostConfig = {
         method: 'post',
@@ -115,10 +109,6 @@ class App extends Component {
       try {
         const newSurveyObj = await axios(axiosPostConfig);
         this.setState({ activeSurvey: newSurveyObj.data });
-        // this.state.activeSurvey.map((x) => {
-        //   console.log(x);
-        // })
-
       } catch (error) {
         console.log(error, 'could not create new survey');
       }
@@ -128,14 +118,13 @@ class App extends Component {
   /* Ping Jotform to clone a survey for the next class */
 
   getActiveSurvey = async () => {
-    console.log('TEst for auth: ', this.props.auth0.isAuthenticated);
-    // const url = `${SERVER}/active`
+    // console.log('TEst for auth: ', this.props.auth0.isAuthenticated);
     try {
-      console.log('inside app.lgetActiveSurvey');
+      // console.log('inside app.lgetActiveSurvey');
       if (this.props.auth0.isAuthenticated) {
-        console.log('inside app.lgetActiveSurvey IF');
+        // console.log('inside app.lgetActiveSurvey IF');
         const tokenResponse = await this.props.auth0.getIdTokenClaims();
-        console.log('getActiveSurvey getIdTokenClaims result:', tokenResponse);
+        // console.log('getActiveSurvey getIdTokenClaims result:', tokenResponse);
         const jwt = tokenResponse.__raw;
 
         const axiosRequestConfig = {
@@ -145,9 +134,9 @@ class App extends Component {
           headers: { "Authorization": `Bearer ${jwt}` },
         }
 
-        console.log('inside getActiveSurvey: getting const activeSurvey');
+        // console.log('inside getActiveSurvey: getting const activeSurvey');
         const activeSurveyResponse = await axios(axiosRequestConfig);
-        console.log('inside getActiveSurbey activeSurvey.data', activeSurveyResponse.data);
+        // console.log('inside getActiveSurbey activeSurvey.data', activeSurveyResponse.data);
 
         this.setState({
           activeSurvey: activeSurveyResponse.data
@@ -169,7 +158,6 @@ class App extends Component {
 
       // console.log(this.state.activeSurvey);
 
-      // Don't know if we need this if statement below
       if (this.state.activeSurvey === undefined) {
         console.log('activeSurvey is null');
       } else {
@@ -205,21 +193,21 @@ class App extends Component {
     if (this.props.auth0.isAuthenticated) {
       const res = await this.props.auth0.getIdTokenClaims();
       const jwt = res.__raw;
-      console.log(res);
-      console.log(jwt);
+      // console.log(res);
+      // console.log(jwt);
       const config = {
         headers: { "Authorization": `Bearer ${jwt}` },
       }
-      console.log(config);
+      // console.log(config);
       return config;
     }
   }
 
   getActivePublicSurvey = async (activeKey) => {
     try {
-      console.log('inside app.getActivePublicSurvey');
+      // console.log('inside app.getActivePublicSurvey');
       let publicResults = await axios.get(`${SERVER}/public-active/${activeKey.key}`);
-      console.log('pub res ', publicResults);
+      // console.log('pub res ', publicResults);
       this.setState({
         publicActive: publicResults.data,
         redirect: true
@@ -232,7 +220,7 @@ class App extends Component {
 
   handleKeySubmit = async (e) => {
     e.preventDefault();
-    console.log('key state', this.state.key);
+    // console.log('Key: ', this.state.key);
     let activeKey = {
       key: this.state.key,
     }
@@ -240,14 +228,14 @@ class App extends Component {
   }
 
   handleKeyInput = (e) => {
-    console.log('input value: ', e.target.value);
+    // console.log('input value: ', e.target.value);
     this.setState({
       key: e.target.value
     })
   }
 
   render() {
-    console.log('key test', this.state.key);
+    // console.log('key test', this.state.key);
     // console.log('this.props.isAuthenticated, user?:', this.props.auth0.isAuthenticated, this.props.auth0.user);
     // console.log('New Survey: ', this.state.activeSurvey);
     // console.log('Survey ID path test: ', this.state.activeSurvey);

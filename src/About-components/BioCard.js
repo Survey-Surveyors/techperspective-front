@@ -4,8 +4,18 @@ import Card from 'react-bootstrap/Card';
 export default class BioCard extends Component {
   render() {
     return (
-      <Card style={{ width: '18rem' }}>
-        <Card.Img variant='top' src={this.props.img} alt={this.props.name} />
+      <Card style={{ 
+        display: 'flex',
+        marginTop: '20px',
+        marginLeft: 'auto',
+        marginRight: 'auto'
+        }}>
+        <Card.Img variant='top' src={this.props.img} alt={this.props.name} 
+        style={{
+          alignSelf: 'center',
+          width: '17em',
+          height: '17em'
+        }}/>
         <Card.Body>
           <Card.Title>{this.props.name}</Card.Title>
           <Card.Text>{this.props.bio}</Card.Text>

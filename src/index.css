@@ -100,9 +100,33 @@ h2 {
 #Footer {
   position: absolute;
   bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
+  background: rgba(0, 0, 0, 0.781);
+  color: white;
+}
+
+#foot {
+  color: white;
+  align-content: center;
 }
 
 #home {
-  width: 100%
+  width: 100%;
+  font-size: 3vw;
+}
+
+.description {
+  font-size: 1.9vw;
+  margin-left: 2vw;
+  margin-right: 2vw;
+}
+
+.key-form {
+  margin-left: 35vw;
+  margin-right: 35vw;
+  text-align: center;
+  padding: 1vw;
+  border: rgba(0, 0, 0, 0.781) 0.2vw solid;
 }
