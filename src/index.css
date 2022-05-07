@@ -100,7 +100,16 @@ h2 {
 #Footer {
   position: absolute;
   bottom: 0;
+  left: 0;
+  right: 0;
   width: 100%;
+  background: rgba(0, 0, 0, 0.781);
+  color: white;
+}
+
+#foot {
+  color: white;
+  align-content: center;
 }
 
 #home {
