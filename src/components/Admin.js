@@ -23,18 +23,12 @@ class Admin extends Component {
         this.setState({ showModal: true })
     }
 
-    // componentDidMount() {
-    //     console.log(this.props.auth0.isAuthenticated);
-    //     this.props.getActiveSurvey();
-    // }
-
     componentDidMount() {
-
         this.props.getActiveSurvey();
       }
 
     render() {
-        console.log("we are looking at Admin.js", this.props.auth0.isAuthenticated);
+        // console.log("we are looking at Admin.js", this.props.auth0.isAuthenticated);
         return (
             <div>
             <ConfirmModal showModal={this.state.showModal} closeModal={this.closeModal} putActiveSurvey={this.props.putActiveSurvey} />
@@ -43,7 +37,8 @@ class Admin extends Component {
                         
                         <ActiveSurveyContainer 
                         activeSurvey={this.props.activeSurvey} 
-                        createNewSurvey={this.props.createNewSurvey} graphResults={this.props.graphResults} 
+                        createNewSurvey={this.props.createNewSurvey} 
+                        graphResults={this.props.graphResults} 
                         openModal={this.openModal} 
                         getActiveSurvey={this.props.getActiveSurvey} 
                         />
