@@ -19,13 +19,13 @@ class HeaderUser extends Component {
 
         <div>
           <Link className="headerButton" to="/user-home">
-            <Button style={{ height: '3vw', width: '11vw', backgroundColor: "#ea4444", marginLeft: "1vw" }} variant="warning">Home</Button>
+            <Button style={{ height: '3vw', width: '11vw', backgroundColor: "#ea4444", marginLeft: "1vw", fontSize: "1vw" }} variant="warning">Home</Button>
           </Link>
         </div>
 
         <div>
           <Link type="button" className="headerButton" to="/user-about">
-            <Button style={{ height: '3vw', width: '11vw', marginLeft: "1vw" }} variant="info">About Us</Button>
+            <Button style={{ height: '3vw', width: '11vw', marginLeft: "1vw", fontSize: "1vw" }} variant="info">About Us</Button>
           </Link>
         </div>
 
@@ -33,7 +33,7 @@ class HeaderUser extends Component {
 
         <div>
           <Link className="headerButton" to="/public-survey">
-            <Button style={{ height: '3vw', width: '11vw', marginLeft: "1vw", marginRight: "1vw" }} variant="warning">Show Survey</Button>
+            <Button style={{ height: '3vw', width: '11vw', marginLeft: "1vw", marginRight: "1vw", fontSize: "1vw" }} variant="warning">Survey</Button>
           </Link>
         </div>
 
