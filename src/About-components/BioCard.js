@@ -5,13 +5,16 @@ export default class BioCard extends Component {
   render() {
     return (
       <Card style={{ 
-        width: '21rem'
+        display: 'flex',
+        marginTop: '20px',
+        marginLeft: 'auto',
+        marginRight: 'auto'
         }}>
         <Card.Img variant='top' src={this.props.img} alt={this.props.name} 
         style={{
           alignSelf: 'center',
-          width: '17rem',
-          height: '17rem'
+          width: '17em',
+          height: '17em'
         }}/>
         <Card.Body>
           <Card.Title>{this.props.name}</Card.Title>
